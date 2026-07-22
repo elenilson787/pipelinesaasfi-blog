@@ -89,46 +89,55 @@ const { Content } = await render(review);
           }
         });
 
-        // 2. Transforma a seção de Pros e Cons em um Container de 2 Colunas
+        // 2. Transforma flexivelmente qualquer seção de Prós e Contras em Cards Lado a Lado
         const body = document.querySelector('.article-body');
         if (body) {
-          const headings = Array.from(body.querySelectorAll('p, h3, h4, p strong'));
-          let prosParagraph = null;
-          let consParagraph = null;
+          const elements = Array.from(body.children);
 
-          headings.forEach(el => {
-            if (el.textContent.includes('Pros') && !prosParagraph) prosParagraph = el.closest('p') || el;
-            if (el.textContent.includes('Cons') && !consParagraph) consParagraph = el.closest('p') || el;
-          });
+          for (let i = 0; i < elements.length; i++) {
+            const el = elements[i];
+            const text = el.textContent || '';
 
-          if (prosParagraph && consParagraph) {
-            const prosList = prosParagraph.nextElementSibling;
-            const consList = consParagraph.nextElementSibling;
+            // Verifica se o elemento é um título de Prós / Vantagens
+            const isProHeader = /pros|advantages|✓/i.test(text) && !/cons|limitations|✕|x/i.test(text);
 
-            if (prosList && consList && (prosList.tagName === 'UL' || prosList.tagName === 'OL')) {
-              const grid = document.createElement('div');
-              grid.className = 'pros-cons-grid';
+            if (isProHeader) {
+              const proList = elements[i + 1];
+              const conHeader = elements[i + 2];
+              const conList = elements[i + 3];
 
-              const prosCard = document.createElement('div');
-              prosCard.className = 'pros-card';
-              prosCard.appendChild(prosParagraph.cloneNode(true));
-              prosCard.appendChild(prosList.cloneNode(true));
+              const isConHeader = conHeader && /cons|limitations|✕|x/i.test(conHeader.textContent || '');
 
-              const consCard = document.createElement('div');
-              consCard.className = 'cons-card';
-              consCard.appendChild(consParagraph.cloneNode(true));
-              consCard.appendChild(consList.cloneNode(true));
+              if (proList && conHeader && conList && isConHeader && 
+                 (proList.tagName === 'UL' || proList.tagName === 'OL') &&
+                 (conList.tagName === 'UL' || conList.tagName === 'OL')) {
 
-              grid.appendChild(prosCard);
-              grid.appendChild(consCard);
+                const grid = document.createElement('div');
+                grid.className = 'pros-cons-grid';
 
-              prosParagraph.parentNode.insertBefore(grid, prosParagraph);
+                const prosCard = document.createElement('div');
+                prosCard.className = 'pros-card';
+                prosCard.appendChild(el.cloneNode(true));
+                prosCard.appendChild(proList.cloneNode(true));
 
-              // Remove os elementos antigos para não duplicar
-              prosParagraph.remove();
-              prosList.remove();
-              consParagraph.remove();
-              consList.remove();
+                const consCard = document.createElement('div');
+                consCard.className = 'cons-card';
+                consCard.appendChild(conHeader.cloneNode(true));
+                consCard.appendChild(conList.cloneNode(true));
+
+                grid.appendChild(prosCard);
+                grid.appendChild(consCard);
+
+                el.parentNode.insertBefore(grid, el);
+
+                // Oculta os elementos antigos convertidos
+                el.style.display = 'none';
+                proList.style.display = 'none';
+                conHeader.style.display = 'none';
+                conList.style.display = 'none';
+
+                i += 3; // Pula os elementos processados
+              }
             }
           }
         }
@@ -223,7 +232,7 @@ const { Content } = await render(review);
         margin-bottom: 0.6rem !important;
       }
 
-      /* === NOVO LAYOUT DE PROS E CONS (2 COLUNAS) === */
+      /* === LAYOUT INTELIGENTE DE PROS E CONS (2 COLUNAS) === */
       .pros-cons-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -253,18 +262,20 @@ const { Content } = await render(review);
         border: 2px solid #fecaca !important;
       }
 
-      .pros-card p, .pros-card strong {
+      .pros-card p, .pros-card strong, .pros-card h3, .pros-card h4 {
         color: #166534 !important;
-        font-size: 1.25rem !important;
+        font-size: 1.2rem !important;
         font-weight: 700 !important;
         margin-bottom: 12px !important;
+        margin-top: 0 !important;
       }
 
-      .cons-card p, .cons-card strong {
+      .cons-card p, .cons-card strong, .cons-card h3, .cons-card h4 {
         color: #991b1b !important;
-        font-size: 1.25rem !important;
+        font-size: 1.2rem !important;
         font-weight: 700 !important;
         margin-bottom: 12px !important;
+        margin-top: 0 !important;
       }
 
       .pros-card ul, .cons-card ul {
