@@ -1,0 +1,243 @@
+---
+import { getCollection } from 'astro:content';
+
+// Busca os reviews usando a coleção do Astro 5
+const allReviews = await getCollection('reviews');
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="4asuyrZjA0xOrMO97oqr-As2o-Np536vIrNMCu0EPso" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" type="image/png" href="/images/logos/favicon.png">
+    <link rel="apple-touch-icon" href="/images/logos/apple-touch-icon.png">
+
+    <title>PipelineSaaSFi | Independent SaaS Reviews & Software Guides</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QRDV52HC7K"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QRDV52HC7K');
+    </script>
+    
+    <meta name="description" content="Independent SaaS reviews, software comparisons and practical buying guides for CRM, sales, automation, AI and business tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PipelineSaaSFi | Independent SaaS Reviews">
+    <meta property="og:description" content="Independent SaaS reviews, comparisons and software buying guides to help businesses choose the best tools.">
+    <meta property="og:url" content="https://pipelineasafi.com/">
+    <meta property="og:image" content="https://pipelineasafi.com/images/social/og-home.jpg">
+    <meta property="og:site_name" content="PipelineSaaSFi">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PipelineSaaSFi | Independent SaaS Reviews">
+    <meta name="twitter:description" content="Independent SaaS Reviews and Buying Guides.">
+    <meta name="twitter:image" content="https://pipelineasafi.com/images/social/og-home.jpg">
+    <meta name="keywords" content="SaaS reviews, software reviews, CRM software, AI tools, business software, software comparisons, buying guides">
+    <meta name="author" content="PipelineSaaSFi Editorial Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://pipelineasafi.com/">
+    <meta name="impact-site-verification" content="46283509-fd22-444c-bdda-1cfd2f0821ee">
+
+    <link rel="stylesheet" href="/style.css">
+
+    <script type="application/ld+json" is:inline>
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "PipelineSaaSFi",
+        "url": "https://pipelineasafi.com/",
+        "description": "Independent SaaS reviews, software comparisons and practical buying guides.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "PipelineSaaSFi",
+            "url": "https://pipelineasafi.com/"
+        }
+    }
+    </script>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a href="/" class="logo" aria-label="PipelineSaaSFi home">
+                Pipeline<span>SaaS</span>Fi
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="#reviews">Reviews</a>
+                <a href="#comparisons">Comparisons</a>
+                <a href="#guides">Buying Guides</a>
+                <a href="#about">About</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container hero-content">
+            <span class="hero-label">Independent software research</span>
+            <h1>Independent SaaS Reviews, Comparisons and Buying Guides</h1>
+            <p>
+                We research, analyze and compare business software so you can
+                choose the right tools with greater confidence and avoid
+                wasting money on overhyped products.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#reviews" class="primary-button">Explore Reviews</a>
+                <a href="/review-methodology" class="secondary-button">How We Review</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-bar">
+        <div class="container trust-grid">
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <div>
+                    <strong>Independent Research</strong>
+                    <small>Clear and transparent analysis</small>
+                </div>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">↻</span>
+                <div>
+                    <strong>Regularly Updated</strong>
+                    <small>Pricing and features are reviewed</small>
+                </div>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">▦</span>
+                <div>
+                    <strong>Structured Reviews</strong>
+                    <small>Consistent evaluation criteria</small>
+                </div>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">◎</span>
+                <div>
+                    <strong>Editorial Independence</strong>
+                    <small>Commissions do not determine ratings</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section class="content-section categories-section">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">Explore</span>
+                        <h2>Browse Software by Category</h2>
+                    </div>
+                    <p>Find reviews and comparisons organized around the software needs of modern businesses.</p>
+                </div>
+
+                <div class="categories-grid">
+                    <a href="#reviews" class="category-card">
+                        <span class="category-icon">CRM</span>
+                        <h3>CRM Software</h3>
+                        <p>Customer relationship management platforms for sales and growth teams.</p>
+                    </a>
+                    <a href="#reviews" class="category-card">
+                        <span class="category-icon">AI</span>
+                        <h3>AI Tools</h3>
+                        <p>Artificial intelligence tools for content, productivity and business operations.</p>
+                    </a>
+                    <a href="#comparisons" class="category-card">
+                        <span class="category-icon">AUTO</span>
+                        <h3>Automation</h3>
+                        <p>Workflow automation platforms that connect apps, data and business processes.</p>
+                    </a>
+                    <a href="#reviews" class="category-card">
+                        <span class="category-icon">B2B</span>
+                        <h3>Sales Tools</h3>
+                        <p>Lead generation, prospecting and outbound sales software.</p>
+                    </a>
+                    <a href="#guides" class="category-card">
+                        <span class="category-icon">MAIL</span>
+                        <h3>Email Marketing</h3>
+                        <p>Email campaign, newsletter and marketing automation platforms.</p>
+                    </a>
+                    <a href="#guides" class="category-card">
+                        <span class="category-icon">PM</span>
+                        <h3>Project Management</h3>
+                        <p>Tools for planning projects, managing tasks and improving team collaboration.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO AUTOMÁTICA DE REVIEWS -->
+        <section class="content-section reviews-section" id="reviews">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">Latest content</span>
+                        <h2>Latest In-Depth Reviews</h2>
+                    </div>
+                    <p>Detailed evaluations of popular SaaS tools, including pricing, features, limitations and ideal users.</p>
+                </div>
+
+                <div class="blog-grid">
+                    {allReviews && allReviews.length > 0 ? (
+                        allReviews.map((review) => (
+                            <article class="post-card">
+                                <div class="card-badge">{review.data.badge}</div>
+
+                                <div class="card-content">
+                                    <h3>
+                                        <a href={`/reviews/${review.id}`}>
+                                            {review.data.title}
+                                        </a>
+                                    </h3>
+
+                                    <p>{review.data.description}</p>
+
+                                    <div class="card-details">
+                                        <span>Updated {review.data.updatedDate}</span>
+                                        <span>{review.data.readTime}</span>
+                                    </div>
+
+                                    <div class="card-meta">
+                                        <span class="rating">★ {review.data.rating} / 5</span>
+                                        <a href={`/reviews/${review.id}`} class="read-more">Read Review →</a>
+                                    </div>
+                                </div>
+                            </article>
+                        ))
+                    ) : (
+                        <p>No reviews found.</p>
+                    )}
+                </div>
+            </div>
+        </section>
+
+        <section class="methodology-section">
+            <div class="container methodology-grid">
+                <div class="methodology-content">
+                    <span class="section-label">Our process</span>
+                    <h2>How PipelineSaaSFi Reviews Software</h2>
+                    <p>Our reviews follow a consistent editorial process. We examine official product information, pricing, available features, usability, integrations, limitations and documented customer experiences.</p>
+                    <a href="/review-methodology" class="text-link">Read our full review methodology →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 PipelineSaaSFi. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+---
+import { getCollection, render } from 'astro:content';
+
+// 1. Gera as rotas estáticas para todas as reviews existentes
+export async function getStaticPaths() {
+  const reviews = await getCollection('reviews');
+  return reviews.map(review => ({
+    params: { id: review.id },
+    props: { review },
+  }));
+}
+
+const { review } = Astro.props;
+const { Content } = await render(review);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{review.data.title} | PipelineSaaSFi</title>
+    <meta name="description" content={review.data.description}>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QRDV52HC7K"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-QRDV52HC7K');
+    </script>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <!-- Cabeçalho -->
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a href="/" class="logo" aria-label="PipelineSaaSFi home">
+                Pipeline<span>SaaS</span>Fi
+            </a>
+            <nav class="main-nav">
+                <a href="/#reviews">Reviews</a>
+                <a href="/#comparisons">Comparisons</a>
+                <a href="/#guides">Buying Guides</a>
+                <a href="/#about">About</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo da Review -->
+    <main class="container content-section" style="padding-top: 40px;">
+        <article class="review-article">
+            <div class="card-badge" style="display: inline-block; margin-bottom: 15px;">{review.data.badge}</div>
+            <h1 style="font-size: 2.5rem; margin-bottom: 15px;">{review.data.title}</h1>
+            
+            <div class="card-details" style="margin-bottom: 30px; font-size: 0.9rem; color: #666;">
+                <span>Updated: {review.data.updatedDate}</span> • 
+                <span>{review.data.readTime}</span> • 
+                <span>Rating: ★ {review.data.rating} / 5</span>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 30px;" />
+
+            <!-- Renderiza o texto em Markdown formatado -->
+            <div class="article-body">
+                <Content />
+            </div>
+        </article>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 PipelineSaaSFi. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
