@@ -70,10 +70,43 @@ const { Content } = await render(review);
         </article>
     </main>
 
-    <!-- Rodapé -->
+   
+   <!-- Rodapé Completo em Colunas -->
     <footer class="footer">
-        <div class="container footer-bottom">
-            <p>&copy; 2026 PipelineSaaSFi. All rights reserved.</p>
+        <div class="container footer-content">
+            <!-- Coluna 1: Sobre -->
+            <div class="footer-col brand-col">
+                <a href="/" class="logo footer-logo">Pipeline<span>SaaS</span>Fi</a>
+                <p>Independent B2B software reviews, comparisons, and automated workflow guides to help teams scale faster.</p>
+            </div>
+
+            <!-- Coluna 2: Navegação -->
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="/#reviews">Reviews</a></li>
+                    <li><a href="/#comparisons">Comparisons</a></li>
+                    <li><a href="/#guides">Buying Guides</a></li>
+                    <li><a href="/about">About Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Coluna 3: Legal -->
+            <div class="footer-col">
+                <h4>Legal & Policies</h4>
+                <ul>
+                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/affiliate-disclosure">Affiliate Disclosure</a></li>
+                    <li><a href="/contact">Contact Support</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+            <div class="container">
+                <p>&copy; 2026 PipelineSaaSFi. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
@@ -347,6 +380,86 @@ const { Content } = await render(review);
 
       .article-body tr:nth-child(even) td {
         background-color: #f8fafc !important;
+      }
+
+      /* === ESTILOS DO RODAPÉ COMPLETO === */
+      .footer {
+        background-color: #0f172a !important;
+        color: #94a3b8 !important;
+        padding-top: 60px !important;
+        border-top: 1px solid #1e293b !important;
+        font-family: system-ui, -apple-system, sans-serif !important;
+        margin-top: 60px !important;
+      }
+
+      .footer-content {
+        display: grid !important;
+        grid-template-columns: 2fr 1fr 1fr !important;
+        gap: 40px !important;
+        padding-bottom: 50px !important;
+        max-width: 1100px !important;
+        margin: 0 auto !important;
+      }
+
+      @media (max-width: 768px) {
+        .footer-content {
+          grid-template-columns: 1fr !important;
+          gap: 30px !important;
+        }
+      }
+
+      .footer-col h4 {
+        color: #ffffff !important;
+        font-size: 1.1rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 18px !important;
+      }
+
+      .footer-col p {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+        color: #94a3b8 !important;
+        margin-top: 12px !important;
+      }
+
+      .footer-col ul {
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .footer-col li {
+        margin-bottom: 10px !important;
+      }
+
+      .footer-col a {
+        color: #94a3b8 !important;
+        text-decoration: none !important;
+        font-size: 0.95rem !important;
+        transition: color 0.2s ease !important;
+      }
+
+      .footer-col a:hover {
+        color: #38bdf8 !important;
+      }
+
+      .footer-logo {
+        color: #ffffff !important;
+        font-size: 1.4rem !important;
+        font-weight: 800 !important;
+        text-decoration: none !important;
+      }
+
+      .footer-logo span {
+        color: #3b82f6 !important;
+      }
+
+      .footer-bottom-bar {
+        border-top: 1px solid #1e293b !important;
+        padding: 20px 0 !important;
+        text-align: center !important;
+        font-size: 0.875rem !important;
+        color: #64748b !important;
       }
     </style>
 </body>
