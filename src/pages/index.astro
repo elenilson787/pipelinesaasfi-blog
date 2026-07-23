@@ -221,6 +221,43 @@ const allReviews = await getCollection('reviews');
             </div>
         </section>
 
+<!-- SEÇÃO DE BUYING GUIDES & E-BOOKS -->
+        <section class="content-section guides-section" id="guides">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-label">Resources & Downloads</span>
+                        <h2>Buying Guides & Premium Resources</h2>
+                    </div>
+                    <p>In-depth framework guides, software selection checklists, and digital playbooks to optimize your SaaS stack.</p>
+                </div>
+
+                <div class="guides-grid">
+                    <!-- Card de Guia/E-book 1 -->
+                    <div class="guide-card">
+                        <div class="guide-badge">E-Book / Playbook</div>
+                        <h3>The 2026 B2B Tech Stack Architecture Guide</h3>
+                        <p>A step-by-step playbook on integrating CRM, outbound lead generation, and workflow automation without overspending.</p>
+                        <div class="guide-footer">
+                            <span class="price-tag">Free Download</span>
+                            <a href="/guides/b2b-tech-stack-guide" class="guide-btn">Get Guide →</a>
+                        </div>
+                    </div>
+
+                    <!-- Card de Guia/E-book 2 (Exemplo de produto pago/Hotmart/Shopee) -->
+                    <div class="guide-card featured-guide">
+                        <div class="guide-badge premium-badge">Featured Toolkit</div>
+                        <h3>SaaS Evaluation Checklist & ROI Calculator</h3>
+                        <p>Complete decision-making framework and spreadsheet tools to evaluate software vendor pricing and implementation risks.</p>
+                        <div class="guide-footer">
+                            <span class="price-tag">$19.00</span>
+                            <a href="SEU_LINK_DE_VENDA_AQUI" target="_blank" class="guide-btn primary">Buy Now →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="methodology-section">
             <div class="container methodology-grid">
                 <div class="methodology-content">
@@ -355,4 +392,108 @@ const allReviews = await getCollection('reviews');
     font-size: 0.875rem !important;
     color: #64748b !important;
   }
+
+/* === ESTILOS DA SEÇÃO GUIDES / E-BOOKS === */
+.guides-section {
+  padding: 60px 0;
+  background-color: #f8fafc;
+}
+
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.guide-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guide-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.08);
+}
+
+.featured-guide {
+  border: 2px solid #2563eb;
+  position: relative;
+}
+
+.guide-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  width: fit-content;
+}
+
+.premium-badge {
+  color: #1e40af;
+  background: #dbeafe;
+}
+
+.guide-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.guide-card p {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.guide-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  margin-top: auto;
+}
+
+.price-tag {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+.guide-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #2563eb;
+  background: #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.guide-btn.primary {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.guide-btn:hover {
+  opacity: 0.9;
+}
 </style>
