@@ -80,14 +80,13 @@ const allReviews = await getCollection('reviews');
         </div>
     </header>
 
-    <section class="hero-section">
+    <!-- HERO SECTION ENXUTO -->
+    <section class="hero-section compact-hero">
         <div class="container hero-content">
             <span class="hero-label">Independent software research</span>
-            <h1>Independent SaaS Reviews, Comparisons and Buying Guides</h1>
+            <h1>Independent SaaS Reviews & Software Guides</h1>
             <p>
-                We research, analyze and compare business software so you can
-                choose the right tools with greater confidence and avoid
-                wasting money on overhyped products.
+                We research, analyze and compare business software so you can choose the right tools with greater confidence.
             </p>
 
             <div class="hero-buttons">
@@ -131,47 +130,21 @@ const allReviews = await getCollection('reviews');
     </section>
 
     <main>
-        <section class="content-section categories-section">
+        <!-- NOVO: CHIPS COMPACTOS DE CATEGORIA -->
+        <section class="content-section category-chips-section">
             <div class="container">
-                <div class="section-heading">
-                    <div>
-                        <span class="section-label">Explore</span>
-                        <h2>Browse Software by Category</h2>
-                    </div>
-                    <p>Find reviews and comparisons organized around the software needs of modern businesses.</p>
+                <div class="chips-header">
+                    <span class="section-label">Browse by Category</span>
+                    <h2>Filter Software Reviews</h2>
                 </div>
-
-                <div class="categories-grid">
-                    <a href="#reviews" class="category-card">
-                        <span class="category-icon">CRM</span>
-                        <h3>CRM Software</h3>
-                        <p>Customer relationship management platforms for sales and growth teams.</p>
-                    </a>
-                    <a href="#reviews" class="category-card">
-                        <span class="category-icon">AI</span>
-                        <h3>AI Tools</h3>
-                        <p>Artificial intelligence tools for content, productivity and business operations.</p>
-                    </a>
-                    <a href="#comparisons" class="category-card">
-                        <span class="category-icon">AUTO</span>
-                        <h3>Automation</h3>
-                        <p>Workflow automation platforms that connect apps, data and business processes.</p>
-                    </a>
-                    <a href="#reviews" class="category-card">
-                        <span class="category-icon">B2B</span>
-                        <h3>Sales Tools</h3>
-                        <p>Lead generation, prospecting and outbound sales software.</p>
-                    </a>
-                    <a href="#guides" class="category-card">
-                        <span class="category-icon">MAIL</span>
-                        <h3>Email Marketing</h3>
-                        <p>Email campaign, newsletter and marketing automation platforms.</p>
-                    </a>
-                    <a href="#guides" class="category-card">
-                        <span class="category-icon">PM</span>
-                        <h3>Project Management</h3>
-                        <p>Tools for planning projects, managing tasks and improving team collaboration.</p>
-                    </a>
+                
+                <div class="category-chips">
+                    <button class="chip-btn active" data-filter="all">All Reviews</button>
+                    <button class="chip-btn" data-filter="crm">CRM & Sales</button>
+                    <button class="chip-btn" data-filter="automation">Automation</button>
+                    <button class="chip-btn" data-filter="ai">AI Tools</button>
+                    <button class="chip-btn" data-filter="lead-gen">Lead Generation</button>
+                    <button class="chip-btn" data-filter="email">Email Marketing</button>
                 </div>
             </div>
         </section>
@@ -182,38 +155,42 @@ const allReviews = await getCollection('reviews');
                 <div class="section-heading">
                     <div>
                         <span class="section-label">Latest content</span>
-                        <h2>Latest In-Depth Reviews</h2>
+                        <h2>In-Depth Reviews & Comparisons</h2>
                     </div>
                     <p>Detailed evaluations of popular SaaS tools, including pricing, features, limitations and ideal users.</p>
                 </div>
 
-                <div class="blog-grid">
+                <div class="blog-grid" id="reviews-grid">
                     {allReviews && allReviews.length > 0 ? (
-                        allReviews.map((review) => (
-                            <article class="post-card">
-                                <div class="card-badge">{review.data.badge}</div>
+                        allReviews.map((review) => {
+                            // Extrai a categoria em minúsculo para usar na filtragem dinâmica
+                            const categorySlug = (review.data.badge || review.data.category || '').toLowerCase();
+                            return (
+                                <article class="post-card" data-category={categorySlug}>
+                                    <div class="card-badge">{review.data.badge}</div>
 
-                                <div class="card-content">
-                                    <h3>
-                                        <a href={`/reviews/${review.id}`}>
-                                            {review.data.title}
-                                        </a>
-                                    </h3>
+                                    <div class="card-content">
+                                        <h3>
+                                            <a href={`/reviews/${review.id}`}>
+                                                {review.data.title}
+                                            </a>
+                                        </h3>
 
-                                    <p>{review.data.description}</p>
+                                        <p>{review.data.description}</p>
 
-                                    <div class="card-details">
-                                        <span>Updated {review.data.updatedDate}</span>
-                                        <span>{review.data.readTime}</span>
+                                        <div class="card-details">
+                                            <span>Updated {review.data.updatedDate}</span>
+                                            <span>{review.data.readTime}</span>
+                                        </div>
+
+                                        <div class="card-meta">
+                                            <span class="rating">★ {review.data.rating} / 5</span>
+                                            <a href={`/reviews/${review.id}`} class="read-more">Read Review →</a>
+                                        </div>
                                     </div>
-
-                                    <div class="card-meta">
-                                        <span class="rating">★ {review.data.rating} / 5</span>
-                                        <a href={`/reviews/${review.id}`} class="read-more">Read Review →</a>
-                                    </div>
-                                </div>
-                            </article>
-                        ))
+                                </article>
+                            );
+                        })
                     ) : (
                         <p>No reviews found.</p>
                     )}
@@ -307,11 +284,92 @@ const allReviews = await getCollection('reviews');
         </div>
     </footer>
 
+    <!-- SCRIPT DE FILTRAGEM DINÂMICA DOS CHIPS -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        const buttons = document.querySelectorAll('.chip-btn');
+        const cards = document.querySelectorAll('#reviews-grid .post-card');
+
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-filter');
+
+            cards.forEach(card => {
+              const cardCat = card.getAttribute('data-category') || '';
+              if (filter === 'all' || cardCat.includes(filter)) {
+                card.style.display = 'flex';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+      });
+    </script>
 </body>
 </html>
 
-<!-- CSS do Rodapé e dos Guias -->
+<!-- CSS ADICIONAL DOS CHIPS E AJUSTES VISUAIS -->
 <style is:global>
+  /* Hero Compacto */
+  .compact-hero {
+    padding: 40px 0 30px 0 !important;
+  }
+  .compact-hero h1 {
+    font-size: 2.2rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Estilos da Seção de Chips */
+  .category-chips-section {
+    padding: 30px 0 10px 0 !important;
+  }
+  .chips-header {
+    margin-bottom: 15px;
+  }
+  .chips-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .category-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .chip-btn {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .chip-btn:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+  }
+  .chip-btn.active {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+  }
+
+  /* Ajustes dos Cards de Review */
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Footer */
   .footer {
     background-color: #0b1329 !important;
     color: #94a3b8 !important;
@@ -319,7 +377,6 @@ const allReviews = await getCollection('reviews');
     border-top: 1px solid #1e293b !important;
     width: 100% !important;
   }
-
   .footer-content {
     display: grid !important;
     grid-template-columns: 2fr 1fr 1fr !important;
@@ -329,60 +386,50 @@ const allReviews = await getCollection('reviews');
     margin: 0 auto !important;
     text-align: left !important;
   }
-
   @media (max-width: 768px) {
     .footer-content {
       grid-template-columns: 1fr !important;
       gap: 30px !important;
     }
   }
-
   .footer-col h4 {
     color: #ffffff !important;
     font-size: 1.1rem !important;
     font-weight: 700 !important;
     margin-bottom: 16px !important;
   }
-
   .footer-col p {
     font-size: 0.95rem !important;
     line-height: 1.6 !important;
     color: #94a3b8 !important;
     margin-top: 10px !important;
   }
-
   .footer-col ul {
     list-style: none !important;
     padding: 0 !important;
     margin: 0 !important;
   }
-
   .footer-col li {
     margin-bottom: 8px !important;
   }
-
   .footer-col a {
     color: #94a3b8 !important;
     text-decoration: none !important;
     font-size: 0.95rem !important;
     transition: color 0.2s ease !important;
   }
-
   .footer-col a:hover {
     color: #38bdf8 !important;
   }
-
   .footer-logo {
     color: #ffffff !important;
     font-size: 1.4rem !important;
     font-weight: 800 !important;
     text-decoration: none !important;
   }
-
   .footer-logo span {
     color: #3b82f6 !important;
   }
-
   .footer-bottom-bar {
     border-top: 1px solid #1e293b !important;
     padding: 20px 0 !important;
@@ -391,19 +438,17 @@ const allReviews = await getCollection('reviews');
     color: #64748b !important;
   }
 
-  /* === ESTILOS DA SEÇÃO GUIDES / E-BOOKS === */
+  /* Guides */
   .guides-section {
     padding: 60px 0;
     background-color: #f8fafc;
   }
-
   .guides-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 24px;
     margin-top: 30px;
   }
-
   .guide-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
@@ -415,17 +460,14 @@ const allReviews = await getCollection('reviews');
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-
   .guide-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.08);
   }
-
   .featured-guide {
     border: 2px solid #2563eb;
     position: relative;
   }
-
   .guide-badge {
     display: inline-block;
     font-size: 0.75rem;
@@ -438,12 +480,10 @@ const allReviews = await getCollection('reviews');
     margin-bottom: 12px;
     width: fit-content;
   }
-
   .premium-badge {
     color: #1e40af;
     background: #dbeafe;
   }
-
   .guide-card h3 {
     font-size: 1.25rem;
     font-weight: 700;
@@ -451,14 +491,12 @@ const allReviews = await getCollection('reviews');
     margin-bottom: 10px;
     line-height: 1.4;
   }
-
   .guide-card p {
     color: #64748b;
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 20px;
   }
-
   .guide-footer {
     display: flex;
     align-items: center;
@@ -467,13 +505,11 @@ const allReviews = await getCollection('reviews');
     border-top: 1px solid #f1f5f9;
     margin-top: auto;
   }
-
   .price-tag {
     font-weight: 800;
     font-size: 1.1rem;
     color: #0f172a;
   }
-
   .guide-btn {
     display: inline-block;
     padding: 8px 16px;
@@ -485,12 +521,10 @@ const allReviews = await getCollection('reviews');
     background: #f1f5f9;
     transition: all 0.2s ease;
   }
-
   .guide-btn.primary {
     background: #2563eb;
     color: #ffffff;
   }
-
   .guide-btn:hover {
     opacity: 0.9;
   }
