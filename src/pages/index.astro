@@ -285,19 +285,19 @@ const allReviews = await getCollection('reviews');
         </div>
     </footer>
 
-    <!-- SCRIPT DE FILTRAGEM INTELIGENTE DOS CHIPS -->
+    <!-- SCRIPT DE FILTRAGEM CORRIGIDO -->
     <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {
         const buttons = document.querySelectorAll('.chip-btn');
         const cards = document.querySelectorAll('#reviews-grid .post-card');
 
-        // Mapeamento abrangente cobrindo todas as 16 reviews
+        // Mapeamento preciso e sem duplicacoes
         const categoryMap = {
           'all': [],
           'automation': ['automation', 'workflow'],
-          'developers': ['developers', 'developer tools', 'developer'],
-          'sales': ['sales', 'crm', 'lead generation', 'sales outreach', 'email', 'email marketing', 'b2b lead generation', 'lead automation'],
-          'productivity': ['productivity', 'ai tools', 'ai tool', 'workspace', 'ai']
+          'developers': ['developer tools', 'developers', 'developer'],
+          'sales': ['sales', 'crm', 'lead generation', 'sales outreach', 'email marketing', 'b2b lead generation', 'lead automation'],
+          'productivity': ['productivity', 'ai tools', 'ai tool', 'workspace']
         };
 
         buttons.forEach(btn => {
