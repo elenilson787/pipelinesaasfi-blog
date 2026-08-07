@@ -291,13 +291,13 @@ const allReviews = await getCollection('reviews');
         const buttons = document.querySelectorAll('.chip-btn');
         const cards = document.querySelectorAll('#reviews-grid .post-card');
 
-        // Mapeamento abrangente de termos para incluir todas as variacoes de badges
+        // Mapeamento abrangente cobrindo todas as 16 reviews
         const categoryMap = {
           'all': [],
           'automation': ['automation', 'workflow'],
           'developers': ['developers', 'developer tools', 'developer'],
-          'sales': ['sales', 'crm', 'lead generation', 'sales outreach', 'email', 'email marketing', 'b2b lead generation'],
-          'productivity': ['productivity', 'ai tools', 'ai tool', 'workspace']
+          'sales': ['sales', 'crm', 'lead generation', 'sales outreach', 'email', 'email marketing', 'b2b lead generation', 'lead automation'],
+          'productivity': ['productivity', 'ai tools', 'ai tool', 'workspace', 'ai']
         };
 
         buttons.forEach(btn => {
