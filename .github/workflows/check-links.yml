@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies and build site
         run: |
@@ -28,7 +28,6 @@ jobs:
       - name: Link Checker (Lychee)
         uses: lycheeverse/lychee-action@v2
         with:
-          # Define o diretório raiz para resolver links locais e aceita o código HTTP 403
           args: >
             --verbose 
             --no-progress 
