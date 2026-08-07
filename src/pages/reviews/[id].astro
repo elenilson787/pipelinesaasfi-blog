@@ -84,11 +84,25 @@ const { Content } = await render(review);
             <div class="article-body">
                 <Content />
             </div>
+
+            <!-- === SEÇÃO VISUAL DE FAQS === -->
+            {review.data.faqs && review.data.faqs.length > 0 && (
+              <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-container">
+                  {review.data.faqs.map((faq) => (
+                    <div class="faq-card">
+                      <h3>{faq.question}</h3>
+                      <p>{faq.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
         </article>
     </main>
 
-   
-   <!-- Rodapé Completo em Colunas -->
+    <!-- Rodapé Completo em Colunas -->
     <footer class="footer">
         <div class="container footer-content">
             <!-- Coluna 1: Sobre -->
@@ -280,6 +294,68 @@ const { Content } = await render(review);
 
       .article-body li {
         margin-bottom: 0.6rem !important;
+      }
+
+      /* === ESTILOS DA SEÇÃO VISUAL DE FAQS === */
+      .faq-section {
+        margin-top: 4rem !important;
+        padding-top: 2.5rem !important;
+        border-top: 2px solid #e2e8f0 !important;
+      }
+
+      .faq-section h2 {
+        font-size: 1.85rem !important;
+        font-weight: 800 !important;
+        color: #0f172a !important;
+        margin-bottom: 1.8rem !important;
+        position: relative;
+        padding-bottom: 0.5rem !important;
+        border-bottom: 3px solid #e2e8f0 !important;
+      }
+
+      .faq-section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: #2563eb;
+      }
+
+      .faq-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 18px !important;
+      }
+
+      .faq-card {
+        background-color: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        border-left: 4px solid #2563eb !important;
+        border-radius: 10px !important;
+        padding: 22px 26px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02) !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+      }
+
+      .faq-card:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05) !important;
+      }
+
+      .faq-card h3 {
+        font-size: 1.25rem !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+        margin: 0 0 10px 0 !important;
+      }
+
+      .faq-card p {
+        color: #475569 !important;
+        font-size: 1.05rem !important;
+        line-height: 1.65 !important;
+        margin: 0 !important;
       }
 
       /* === LAYOUT INTELIGENTE DE PROS E CONS (2 COLUNAS) === */
