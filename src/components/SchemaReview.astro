@@ -1,0 +1,51 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  itemReviewed: string;
+  ratingValue: number;
+  bestRating?: number;
+  authorName?: string;
+  price?: string;
+  priceCurrency?: string;
+}
+
+const {
+  title,
+  description,
+  itemReviewed,
+  ratingValue,
+  bestRating = 5,
+  authorName = "Elenilson Colares",
+  price = "0",
+  priceCurrency = "USD"
+} = Astro.props;
+
+const schemaData = {
+  "@context": "https://schema.org/",
+  "@type": "Review",
+  "name": title,
+  "reviewBody": description,
+  "itemReviewed": {
+    "@type": "SoftwareApplication",
+    "name": itemReviewed,
+    "applicationCategory": "BusinessApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": price,
+      "priceCurrency": priceCurrency
+    }
+  },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": ratingValue,
+    "bestRating": bestRating
+  },
+  "author": {
+    "@type": "Person",
+    "name": authorName
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
