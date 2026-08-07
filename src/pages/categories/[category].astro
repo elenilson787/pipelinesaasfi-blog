@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allReviews = await getCollection('reviews');
+  
+  // Extrai todas as categorias únicas cadastradas nos Markdowns
+  const categories = [...new Set(allReviews.map(review => review.data.category).filter(Boolean))];
+
+  return categories.map(category => {
+    const filteredReviews = allReviews.filter(review => review.data.category === category);
+    return {
+      params: { category },
+      props: { reviews: filteredReviews, categoryName: category },
+    };
+  });
+}
+
+const { category } = Astro.params;
+const { reviews, categoryName } = Astro.props;
+
+// Títulos amigáveis para cada slug de categoria
+const categoryTitles: Record<string, string> = {
+  automation: "Automation & Workflow Tools",
+  developers: "Developer & AI Coding Tools",
+  sales: "Sales Outreach & B2B Prospecting",
+  productivity: "Productivity & Meeting Assistants"
+};
+
+const displayTitle = categoryTitles[categoryName] || categoryName.toUpperCase();
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best {displayTitle} (2026 Reviews & Comparisons) | PipelineSaaSFi</title>
+    <meta name="description" content={`In-depth reviews, ratings, and comparisons for the best ${displayTitle} in 2026.`}>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="container navbar-content">
+            <a href="/" class="logo">Pipeline<span>SaaS</span>Fi</a>
+            <nav class="main-nav">
+                <a href="/#reviews">Reviews</a>
+                <a href="/#comparisons">Comparisons</a>
+                <a href="/contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 60px 20px; max-width: 1100px; margin: 0 auto;">
+        <div style="margin-bottom: 40px; text-align: center;">
+            <span class="card-badge-vibrant" style="text-transform: uppercase;">Category Hub</span>
+            <h1 style="font-size: 2.8rem; font-weight: 800; color: #0f172a; margin-top: 10px;">{displayTitle}</h1>
+            <p style="color: #64748b; font-size: 1.15rem; max-width: 600px; margin: 10px auto 0;">
+                Explore our independent, data-driven reviews and side-by-side comparisons for modern software in {displayTitle}.
+            </p>
+        </div>
+
+        <!-- Grid de Reviews da Categoria -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
+            {reviews.map(review => (
+                <a href={`/reviews/${review.id}/`} style="text-decoration: none; color: inherit;">
+                    <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <span style="font-size: 0.8rem; font-weight: 700; color: #2563eb; text-transform: uppercase; letter-spacing: 0.05em;">{review.data.badge}</span>
+                            <h2 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin: 10px 0;">{review.data.title}</h2>
+                            <p style="color: #64748b; font-size: 0.95rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{review.data.description}</p>
+                        </div>
+                        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #64748b;">
+                            <span>⏱️ {review.data.readTime}</span>
+                            <span style="background: #fef3c7; color: #d97706; padding: 2px 8px; border-radius: 6px; font-weight: 700;">★ {review.data.rating} / 5</span>
+                        </div>
+                    </div>
+                </a>
+            ))}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-bottom-bar" style="text-align: center;">
+            <p>&copy; 2026 PipelineSaaSFi. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
