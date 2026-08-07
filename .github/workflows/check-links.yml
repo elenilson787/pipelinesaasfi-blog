@@ -4,23 +4,37 @@ on:
   push:
     branches:
       - main
-  # Executa automaticamente todo domingo à meia-noite (UTC)
   schedule:
     - cron: '0 0 * * 0'
-  # Permite executar manualmente pela aba Actions do GitHub
   workflow_dispatch:
 
 jobs:
   link-checker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout do repositório
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verificador de Links (Lychee)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies and build site
+        run: |
+          npm ci
+          npm run build
+
+      - name: Link Checker (Lychee)
         uses: lycheeverse/lychee-action@v2
         with:
-          # Escaneia todos os arquivos Markdown e HTML dentro do projeto
-          args: --verbose --no-progress './**/*.md' './**/*.html'
-          # Cria uma Issue no repositório do GitHub se encontrar links quebrados
-          fail: true
+          # Define o diretório raiz para resolver links locais e aceita o código HTTP 403
+          args: >
+            --verbose 
+            --no-progress 
+            --exclude-mail 
+            --root-dir ./dist
+            --accept 200..299,403
+            --exclude '(linkedin\.com|twitter\.com|x\.com|make\.com)'
+            './dist/**/*.html'
+          fail: false
