@@ -1,5 +1,4 @@
 ---
----
 title: "n8n Review (2026): The Best Open-Source Automation & AI Workflow Engine?"
 description: "An in-depth n8n review for 2026. We evaluate self-hosted vs cloud options, visual workflow editing, native AI agent nodes, pricing structures, and developer flexibility."
 updatedDate: "August 6, 2026"
@@ -16,7 +15,7 @@ faqs:
     answer: "n8n provides full data sovereignty, zero per-task execution fees when self-hosted, and advanced AI agent capabilities with LangChain integration."
   - question: "Do I need coding skills to use n8n?"
     answer: "No, n8n offers a visual drag-and-drop workflow builder. However, it also supports custom JavaScript and Python for advanced technical automation."
-------
+---
 
 # n8n Review (2026): The Best Open-Source Automation & AI Workflow Engine?
 

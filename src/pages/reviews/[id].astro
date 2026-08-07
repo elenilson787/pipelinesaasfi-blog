@@ -29,7 +29,7 @@ const { Content } = await render(review);
         title={review.data.title}
         description={review.data.description}
         itemReviewed={review.data.toolName}
-        ratingValue={review.data.rating}
+        ratingValue={Number(review.data.rating)}
         price={review.data.price || "0"}
       />
     )}
