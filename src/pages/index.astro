@@ -285,25 +285,38 @@ const allReviews = await getCollection('reviews');
         </div>
     </footer>
 
-    <!-- SCRIPT DE FILTRAGEM DINÂMICA DOS CHIPS -->
+    <!-- SCRIPT DE FILTRAGEM INTELIGENTE DOS CHIPS -->
     <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {
         const buttons = document.querySelectorAll('.chip-btn');
         const cards = document.querySelectorAll('#reviews-grid .post-card');
+
+        // Mapeamento abrangente de termos para incluir todas as variacoes de badges
+        const categoryMap = {
+          'all': [],
+          'automation': ['automation', 'workflow'],
+          'developers': ['developers', 'developer tools', 'developer'],
+          'sales': ['sales', 'crm', 'lead generation', 'sales outreach', 'email', 'email marketing', 'b2b lead generation'],
+          'productivity': ['productivity', 'ai tools', 'ai tool', 'workspace']
+        };
 
         buttons.forEach(btn => {
           btn.addEventListener('click', () => {
             buttons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            const filter = btn.getAttribute('data-filter');
+            const filter = btn.getAttribute('data-filter') || 'all';
 
             cards.forEach(card => {
-              const cardCat = card.getAttribute('data-category') || '';
-              if (filter === 'all' || cardCat.includes(filter)) {
+              const cardText = (card.getAttribute('data-category') || '').toLowerCase();
+              
+              if (filter === 'all') {
                 card.style.display = 'flex';
               } else {
-                card.style.display = 'none';
+                const allowedTerms = categoryMap[filter] || [filter];
+                const isMatch = allowedTerms.some(term => cardText.includes(term));
+                
+                card.style.display = isMatch ? 'flex' : 'none';
               }
             });
           });
