@@ -15,7 +15,6 @@ const { review } = Astro.props;
 const { Content } = await render(review);
 ---
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,10 +59,12 @@ const { Content } = await render(review);
                 Pipeline<span>SaaS</span>Fi
             </a>
             <nav class="main-nav">
-                <a href="/#reviews">Reviews</a>
-                <a href="/#comparisons">Comparisons</a>
-                <a href="/#guides">Buying Guides</a>
-                <a href="/#about">About</a>
+                <a href="/#reviews">All Reviews</a>
+                <a href="/categories/automation/">Automation</a>
+                <a href="/categories/developers/">Developers</a>
+                <a href="/categories/sales/">Sales</a>
+                <a href="/categories/productivity/">Productivity</a>
+                <a href="/#guides">Guides</a>
                 <a href="/contact">Contact</a>
             </nav>
         </div>
@@ -113,14 +114,14 @@ const { Content } = await render(review);
                 <p>Independent B2B software reviews, comparisons, and automated workflow guides to help teams scale faster.</p>
             </div>
 
-            <!-- Coluna 2: Navegação -->
+            <!-- Coluna 2: Hubs de Categoria -->
             <div class="footer-col">
-                <h4>Navigation</h4>
+                <h4>Category Hubs</h4>
                 <ul>
-                    <li><a href="/#reviews">Reviews</a></li>
-                    <li><a href="/#comparisons">Comparisons</a></li>
-                    <li><a href="/#guides">Buying Guides</a></li>
-                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/categories/automation/">Automation Tools</a></li>
+                    <li><a href="/categories/developers/">Developer Tools</a></li>
+                    <li><a href="/categories/sales/">Sales & CRM</a></li>
+                    <li><a href="/categories/productivity/">Productivity</a></li>
                 </ul>
             </div>
 
