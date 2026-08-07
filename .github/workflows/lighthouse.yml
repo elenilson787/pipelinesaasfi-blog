@@ -17,15 +17,13 @@ jobs:
         with:
           node-version: 22
 
-      - name: Build site
+      - name: Install dependencies and build site
         run: |
           npm ci
           npm run build
 
-      - name: Audit ALL pages with Lighthouse
-        uses: treosh/lighthouse-ci-action@v12
-        with:
-          # Define a pasta do build para ele varrer TODAS as páginas HTML geradas
-          staticDistDir: './dist'
-          uploadTargets: 'temporary-public-storage'
-          configFile: './lighthouserc.json'
+      - name: Install & Run Lighthouse CI on ALL pages
+        run: |
+          npm install -g @lhci/cli@0.14.x
+          lhci collect --staticDistDir=./dist
+          lhci upload --target=temporary-public-storage
