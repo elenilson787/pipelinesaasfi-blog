@@ -1,5 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
+import SchemaReview from '../../components/SchemaReview.astro';
+import SchemaFAQ from '../../components/SchemaFAQ.astro';
 
 export async function getStaticPaths() {
   const reviews = await getCollection('reviews');
@@ -20,6 +22,21 @@ const { Content } = await render(review);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{review.data.title} | PipelineSaaSFi</title>
     <meta name="description" content={review.data.description}>
+
+    <!-- Injeção dos Schemas do Google (Rich Snippets) -->
+    {review.data.toolName && review.data.rating && (
+      <SchemaReview
+        title={review.data.title}
+        description={review.data.description}
+        itemReviewed={review.data.toolName}
+        ratingValue={review.data.rating}
+        price={review.data.price || "0"}
+      />
+    )}
+
+    {review.data.faqs && review.data.faqs.length > 0 && (
+      <SchemaFAQ faqs={review.data.faqs} />
+    )}
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QRDV52HC7K"></script>
