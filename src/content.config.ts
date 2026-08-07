@@ -9,7 +9,17 @@ const reviews = defineCollection({
     badge: z.string(),
     updatedDate: z.string(),
     readTime: z.string(),
-    rating: z.string(),
+    // Aceita tanto número (4.9) quanto texto ("4.9") para não quebrar reviews antigas
+    rating: z.union([z.number(), z.string()]),
+    // Campos opcionais para SEO e Rich Snippets
+    toolName: z.string().optional(),
+    price: z.string().optional(),
+    faqs: z.array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      })
+    ).optional(),
   }),
 });
 
