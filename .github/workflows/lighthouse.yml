@@ -1,0 +1,24 @@
+name: Weekly Lighthouse Audit
+
+on:
+  # Executa automaticamente todo domingo às 02:00 AM (UTC)
+  schedule:
+    - cron: '0 2 * * 0'
+  # Permite executar manualmente a qualquer momento pela aba Actions do GitHub
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Audit live site with Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            https://pipelineasafi.com/
+            https://pipelineasafi.com/reviews/n8n-review
+          uploadTargets: 'temporary-public-storage'
+          budgetPath: ''
