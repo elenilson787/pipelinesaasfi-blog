@@ -1,0 +1,26 @@
+name: Check Broken Links
+
+on:
+  push:
+    branches:
+      - main
+  # Executa automaticamente todo domingo à meia-noite (UTC)
+  schedule:
+    - cron: '0 0 * * 0'
+  # Permite executar manualmente pela aba Actions do GitHub
+  workflow_dispatch:
+
+jobs:
+  link-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Verificador de Links (Lychee)
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Escaneia todos os arquivos Markdown e HTML dentro do projeto
+          args: --verbose --no-progress './**/*.md' './**/*.html'
+          # Cria uma Issue no repositório do GitHub se encontrar links quebrados
+          fail: true
