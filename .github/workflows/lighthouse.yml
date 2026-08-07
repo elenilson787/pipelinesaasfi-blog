@@ -1,10 +1,8 @@
 name: Weekly Lighthouse Audit
 
 on:
-  # Executa automaticamente todo domingo às 02:00 AM (UTC)
   schedule:
     - cron: '0 2 * * 0'
-  # Permite executar manualmente a qualquer momento pela aba Actions do GitHub
   workflow_dispatch:
 
 jobs:
@@ -14,11 +12,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Audit live site with Lighthouse
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build site
+        run: |
+          npm ci
+          npm run build
+
+      - name: Audit ALL pages with Lighthouse
         uses: treosh/lighthouse-ci-action@v12
         with:
-          urls: |
-            https://pipelineasafi.com/
-            https://pipelineasafi.com/reviews/n8n-review
+          # Define a pasta do build para ele varrer TODAS as páginas HTML geradas
+          staticDistDir: './dist'
           uploadTargets: 'temporary-public-storage'
-          budgetPath: ''
+          configFile: './lighthouserc.json'
