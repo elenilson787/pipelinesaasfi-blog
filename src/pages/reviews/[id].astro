@@ -13,6 +13,10 @@ export async function getStaticPaths() {
 
 const { review } = Astro.props;
 const { Content } = await render(review);
+
+// MONTAGEM DA URL CANÔNICA PADRONIZADA (Sempre com barra no final)
+const siteUrl = 'https://pipelineasafi.com';
+const canonicalUrl = `${siteUrl}/reviews/${review.id}/`;
 ---
 
 <!DOCTYPE html>
@@ -22,6 +26,16 @@ const { Content } = await render(review);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{review.data.title} | PipelineSaaSFi</title>
     <meta name="description" content={review.data.description}>
+
+    <!-- TAG CANONICAL PADRONIZADA (Evita Duplicidade no Google Search Console) -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content={review.data.title}>
+    <meta property="og:description" content={review.data.description}>
+    <meta property="og:url" content={canonicalUrl}>
+    <meta property="og:site_name" content="PipelineSaaSFi">
 
     <!-- Injeção dos Schemas do Google (Rich Snippets) -->
     {review.data.toolName && review.data.rating && (
