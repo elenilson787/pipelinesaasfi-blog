@@ -133,7 +133,7 @@ const allReviews = await getCollection('reviews');
     </section>
 
     <main>
-        <!-- CHIPS COMPACTOS DE CATEGORIA -->
+        <!-- CHIPS COMPACTOS DE CATEGORIA COM AI TOOLS ADICIONADO -->
         <section class="content-section category-chips-section">
             <div class="container">
                 <div class="chips-header">
@@ -147,6 +147,7 @@ const allReviews = await getCollection('reviews');
                     <button class="chip-btn" data-filter="developers">Developers</button>
                     <button class="chip-btn" data-filter="sales">Sales & CRM</button>
                     <button class="chip-btn" data-filter="productivity">Productivity</button>
+                    <button class="chip-btn" data-filter="ai">AI Tools</button>
                 </div>
             </div>
         </section>
@@ -285,19 +286,20 @@ const allReviews = await getCollection('reviews');
         </div>
     </footer>
 
-    <!-- SCRIPT DE FILTRAGEM CORRIGIDO -->
+    <!-- SCRIPT DE FILTRAGEM PERFEITO PARA AS 16 REVIEWS -->
     <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {
         const buttons = document.querySelectorAll('.chip-btn');
         const cards = document.querySelectorAll('#reviews-grid .post-card');
 
-        // Mapeamento preciso e sem duplicacoes
+        // Mapeamento exato de todos os badges presentes no site
         const categoryMap = {
           'all': [],
-          'automation': ['automation', 'workflow'],
-          'developers': ['developer tools', 'developers', 'developer'],
-          'sales': ['sales', 'crm', 'lead generation', 'sales outreach', 'email marketing', 'b2b lead generation', 'lead automation'],
-          'productivity': ['productivity', 'ai tools', 'ai tool', 'workspace']
+          'automation': ['automation'],
+          'developers': ['developer tools', 'developers'],
+          'sales': ['email marketing', 'crm & sales', 'b2b lead generation', 'crm', 'lead generation', 'sales outreach'],
+          'productivity': ['productivity'],
+          'ai': ['ai tools', 'ai tool', 'ai']
         };
 
         buttons.forEach(btn => {
@@ -308,7 +310,7 @@ const allReviews = await getCollection('reviews');
             const filter = btn.getAttribute('data-filter') || 'all';
 
             cards.forEach(card => {
-              const cardText = (card.getAttribute('data-category') || '').toLowerCase();
+              const cardText = (card.getAttribute('data-category') || '').toLowerCase().trim();
               
               if (filter === 'all') {
                 card.style.display = 'flex';
