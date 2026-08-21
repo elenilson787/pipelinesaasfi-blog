@@ -446,6 +446,10 @@ select {
    CARDS DE REVIEWS (ATUALIZADO COM VISUAL MODERNO E IMAGENS)
 ========================================================= */
 
+/* =========================================================
+   CARDS DE REVIEWS (ATUALIZADO COM COR DE FUNDO DIFERENCIADA)
+========================================================= */
+
 .reviews-section {
     background: var(--soft-background);
     border-top: 1px solid var(--border);
@@ -466,9 +470,9 @@ select {
     display: flex;
     flex-direction: column;
 
-    /* Fundo cinza-azulado claro diferenciado e destaque elegante */
-    background-color: #f8fafc;
-    border: 1px solid var(--border);
+    /* COR DE FUNDO DIFERENCIADA PARA DESTAQUE */
+    background-color: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
     border-radius: var(--radius-medium);
 
     overflow: hidden;
@@ -483,8 +487,8 @@ select {
 
 .post-card:hover {
     transform: translateY(-5px);
-    background-color: #ffffff; /* Fica totalmente branco ao passar o mouse */
-    border-color: #bfdbfe;
+    background-color: #ffffff !important; /* Fica totalmente branco ao passar o mouse */
+    border-color: #2563eb !important;
     box-shadow: var(--shadow-medium);
 }
 
@@ -508,9 +512,8 @@ select {
 
 
 .post-card:hover .card-thumbnail {
-    transform: scale(1.04); /* Zoom suave na imagem ao passar o mouse */
+    transform: scale(1.04);
 }
-
 
 .card-badge {
     width: fit-content;
