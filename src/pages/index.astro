@@ -163,49 +163,54 @@ const allReviews = await getCollection('reviews');
                     <p>Detailed evaluations of popular SaaS tools, including pricing, features, limitations and ideal users.</p>
                 </div>
 
-                <div class="blog-grid" id="reviews-grid">
-                    {allReviews && allReviews.length > 0 ? (
-                        allReviews.map((review) => {
-                            const rawCategory = (review.data.badge || review.data.category || '').toLowerCase().trim();
-                            return (
-                                <article class="post-card" data-category={rawCategory}>
-                                    {/* Miniatura de Imagem Opcional */}
-                                    {review.data.image && (
-                                        <div class="card-image-wrapper">
-                                            <a href={`/reviews/${review.id}/`}>
-                                                <img src={review.data.image} alt={review.data.title} class="card-thumbnail" loading="lazy" />
-                                            </a>
-                                        </div>
-                                    )}
-
-                                    <div class="card-badge">{review.data.badge}</div>
-
-                                    <div class="card-content">
-                                        <h3>
-                                            <a href={`/reviews/${review.id}/`}>
-                                                {review.data.title}
-                                            </a>
-                                        </h3>
-
-                                        <p>{review.data.description}</p>
-
-                                        <div class="card-details">
-                                            <span>Updated {review.data.updatedDate}</span>
-                                            <span>{review.data.readTime}</span>
-                                        </div>
-
-                                        <div class="card-meta">
-                                            <span class="rating">★ {review.data.rating} / 5</span>
-                                            <a href={`/reviews/${review.id}/`} class="read-more">Read Review →</a>
-                                        </div>
-                                    </div>
-                                </article>
-                            );
-                        })
-                    ) : (
-                        <p>No reviews found.</p>
+               <div class="blog-grid" id="reviews-grid">
+    {allReviews && allReviews.length > 0 ? (
+        allReviews.map((review) => {
+            const rawCategory = (review.data.badge || review.data.category || '').toLowerCase().trim();
+            return (
+                <article class="post-card" data-category={rawCategory} style="background-color: #f8fafc !important; border: 1px solid #cbd5e1 !important; border-radius: 14px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); transition: transform 0.3s ease;">
+                    
+                    {/* Miniatura de Imagem Opcional (aparece quando houver imagem cadastrada) */}
+                    {review.data.image && (
+                        <div class="card-image-wrapper" style="width: 100%; height: 170px; overflow: hidden; border-radius: 10px; margin-bottom: 16px; background-color: #e2e8f0; border: 1px solid #cbd5e1;">
+                            <a href={`/reviews/${review.id}/`}>
+                                <img src={review.data.image} alt={review.data.title} class="card-thumbnail" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" />
+                            </a>
+                        </div>
                     )}
-                </div>
+
+                    <div class="card-badge" style="display: inline-block; width: fit-content; margin-bottom: 12px; padding: 4px 10px; color: #2563eb; background: #eff6ff; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">
+                        {review.data.badge}
+                    </div>
+
+                    <div class="card-content" style="display: flex; flex-direction: column; flex-grow: 1;">
+                        <h3 style="margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; line-height: 1.4;">
+                            <a href={`/reviews/${review.id}/`} style="color: #0f172a; text-decoration: none;">
+                                {review.data.title}
+                            </a>
+                        </h3>
+
+                        <p style="color: #475569; font-size: 0.92rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">
+                            {review.data.description}
+                        </p>
+
+                        <div class="card-details" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 14px; font-size: 0.85rem; color: #94a3b8; margin-bottom: 12px;">
+                            <span>Updated {review.data.updatedDate}</span>
+                            <span>{review.data.readTime}</span>
+                        </div>
+
+                        <div class="card-meta" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="rating" style="font-size: 0.85rem; font-weight: 700; color: #16a34a;">★ {review.data.rating} / 5</span>
+                            <a href={`/reviews/${review.id}/`} class="read-more" style="color: #2563eb; font-weight: 600; text-decoration: none;">Read Review →</a>
+                        </div>
+                    </div>
+                </article>
+            );
+        })
+    ) : (
+        <p>No reviews found.</p>
+    )}
+</div>
             </div>
         </section>
 
