@@ -169,6 +169,15 @@ const allReviews = await getCollection('reviews');
                             const rawCategory = (review.data.badge || review.data.category || '').toLowerCase().trim();
                             return (
                                 <article class="post-card" data-category={rawCategory}>
+                                    {/* Miniatura de Imagem Opcional */}
+                                    {review.data.image && (
+                                        <div class="card-image-wrapper">
+                                            <a href={`/reviews/${review.id}/`}>
+                                                <img src={review.data.image} alt={review.data.title} class="card-thumbnail" loading="lazy" />
+                                            </a>
+                                        </div>
+                                    )}
+
                                     <div class="card-badge">{review.data.badge}</div>
 
                                     <div class="card-content">
@@ -296,7 +305,7 @@ const allReviews = await getCollection('reviews');
         </div>
     </footer>
 
-    <!-- SCRIPT DE FILTRAGEM PRECISA DAS 16 REVIEWS -->
+    <!-- SCRIPT DE FILTRAGEM PRECISA DAS REVIEWS -->
     <script is:inline>
       document.addEventListener('DOMContentLoaded', () => {
         const buttons = document.querySelectorAll('.chip-btn');
@@ -326,7 +335,6 @@ const allReviews = await getCollection('reviews');
                 card.style.display = 'flex';
               } else {
                 const allowedBadges = categoryMap[filter] || [];
-                // Comparacao exata de listas de badges para nao cruzar categorias
                 const isMatch = allowedBadges.includes(cardBadge);
                 
                 card.style.display = isMatch ? 'flex' : 'none';
@@ -339,7 +347,7 @@ const allReviews = await getCollection('reviews');
 </body>
 </html>
 
-<!-- CSS ADICIONAL DOS CHIPS E AJUSTES VISUAIS -->
+<!-- CSS ADICIONAL COM O NOVO DESIGN DE CARDS E SUPORTE A IMAGENS -->
 <style is:global>
   /* Hero Compacto */
   .compact-hero {
@@ -389,11 +397,46 @@ const allReviews = await getCollection('reviews');
     box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
   }
 
-  /* Ajustes dos Cards de Review */
+  /* NOVO VISUAL DOS CARDS DE REVIEW (Fundo diferenciado e destaque) */
   .post-card {
+    background-color: #f8fafc; /* Fundo cinza-azulado claro diferenciado */
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  }
+
+  .post-card:hover {
+    transform: translateY(-5px);
+    background-color: #ffffff; /* Fica totalmente branco ao passar o mouse */
+    border-color: #cbd5e1;
+    box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Estilização da Miniatura de Imagem nos Cards */
+  .card-image-wrapper {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    background-color: #e2e8f0;
+    border: 1px solid #e2e8f0;
+  }
+
+  .card-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .post-card:hover .card-thumbnail {
+    transform: scale(1.04);
   }
 
   /* Footer */

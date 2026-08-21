@@ -14,6 +14,7 @@ const reviews = defineCollection({
     rating: z.coerce.number().optional(),
     toolName: z.string().optional(),
     price: z.string().optional(),
+    image: z.string().optional(), // <--- CAMPO DE IMAGEM ADICIONADO COM SUCESSO
     faqs: z.array(
       z.object({
         question: z.string(),
