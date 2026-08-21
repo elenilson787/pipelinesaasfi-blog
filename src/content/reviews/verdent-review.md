@@ -72,18 +72,19 @@ Verdent avoids vendor lock-in. Developers can inspect every line of code, link t
 
 ## Verdent AI Pricing & Value Analysis (2026)
 
-Verdent offers scalable subscription tiers suited for solo non-technical builders up to full engineering teams:
+Verdent offers flexible subscription tiers designed for everything from casual prototyping to heavy production workloads:
 
-| Plan Tier | Monthly Price | Best For | Core Inclusions |
+| Plan Tier | Monthly Price | Core Credits & Bônus | Best For |
 | :--- | :--- | :--- | :--- |
-| **Starter / Trial** | **Free / Low Entry** | Exploring & Prototyping | Core agent access, basic project scaffolding, community support |
-| **Pro Builder** | **$20 – $40/mo** | Solopreneurs & Founders | Unlimited project generation, full-stack testing loops, private GitHub sync |
-| **Scale / Team** | **$100+/mo** | Agencies & Scaling Startups | Multi-seat access, priority compute, high-concurrency builds, dedicated support |
+| **Free** | **$0** | 100 Credits (7-day trial) + 1 cloud app | Exploring & testing out the platform |
+| **Lite** | **$5/mo** | Eco Mode included (low-cost models) + 2 cloud apps | Casual users, light projects, and experiments |
+| **Starter** | **$19/mo** | 480 credits/mo (320 base + 160 bonus) | Solopreneurs & indie developers |
+| **Pro** | **$59/mo** | 1,500 credits/mo (1,000 base + 500 bonus) | Regular users & continuous development |
+| **Max** | **$179/mo** | 4,500 credits/mo (3,000 base + 1,500 bonus) | Heavy workflows, agencies & scaling teams |
 
-> **ROI Verdict:** For non-technical founders and small teams, Verdent eliminates the need to spend thousands of dollars on preliminary MVP outsourcing. It compresses weeks of initial scaffolding and boilerplate development into minutes.
+> **ROI Verdict:** With entry points starting as low as $5/mo for light users and the popular **Starter plan at $19/mo**, Verdent eliminates the friction of expensive developer retainers while giving founders full control over their code architecture.
 
 [Explore Verdent AI Plans & Start Building →](https://coderdecktechnologieshklimited.sjv.io/rE1GB5)
-
 ---
 
 ## Pros and Cons
